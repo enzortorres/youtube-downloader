@@ -25,4 +25,4 @@ try:
     print("Download completo!")
 except Exception as error:
     print("Download falhou")
-    print(f"Erro: {error}")
+    print(f"\033[1;31m{error.__class__.__name__}: {error}\033[0m")
