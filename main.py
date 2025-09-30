@@ -21,16 +21,16 @@ try:
     opcao = int(input("O que deseja baixar?\n1 - Vídeo\n2 - Áudio (PT-BR se disponível)\n>>> "))
 
     if opcao == 1:
-        print("\n🎬 Baixando vídeo em melhor qualidade disponível...")
+        print("\nBaixando vídeo em melhor qualidade disponível...")
         comando = f'yt-dlp -f "bestvideo+bestaudio/best" -o "{pasta_destino}/%(title)s.%(ext)s" "{url}"'
         os.system(comando)
-        print("✅ Download de vídeo completo!")
+        print("\033[32mDownload de vídeo completo!\033[m")
 
     elif opcao == 2:
         print("\nBaixando áudio em português (se disponível)...")
         comando = f'yt-dlp -f "bestaudio[language=pt]/bestaudio" -o "{pasta_destino}/%(title)s.%(ext)s" "{url}"'
         os.system(comando)
-        print("Download de áudio completo!")
+        print("\033[32mDownload de áudio completo!\033[m")
 
     else:
         print("Opção inválida.")
