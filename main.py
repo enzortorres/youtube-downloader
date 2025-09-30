@@ -1,15 +1,15 @@
-from pytubefix import YouTube
-from pathlib import Path
 import os
 import platform
+from pathlib import Path
 
 sistema = platform.system()
+
 # > Seleciona a pasta (Vídeos) de acordo com o sistema operacional
-if sistema == 'Windows': # ? Windows
+if sistema == 'Windows':  # ? Windows
     pasta_videos = Path.home() / "Videos"
-elif sistema == 'Darwin': # ? Mac-OS
+elif sistema == 'Darwin':  # ? Mac-OS
     pasta_videos = Path.home() / "Movies"
-else: # ? Linux e outros
+else:  # ? Linux e outros
     pasta_videos = Path.home() / "Videos"
 
 pasta_destino = pasta_videos / "youtube_downloads"
@@ -18,21 +18,20 @@ pasta_destino.mkdir(parents=True, exist_ok=True)
 url = input("Digite a URL do vídeo que deseja baixar: ").strip()
 
 try:
-    opcao = int(input("O que deseja baixar?\n1 - Vídeo\n2 - Áudio\n>>> "))
-    yt = YouTube(url)
-
-    print(f"Baixando: {yt.title}")
+    opcao = int(input("O que deseja baixar?\n1 - Vídeo\n2 - Áudio (PT-BR se disponível)\n>>> "))
 
     if opcao == 1:
-        stream = yt.streams.get_highest_resolution()
-        stream.download(output_path=pasta_destino)
-        print("Download de vídeo completo!")
+        print("\n🎬 Baixando vídeo em melhor qualidade disponível...")
+        comando = f'yt-dlp -f "bestvideo+bestaudio/best" -o "{pasta_destino}/%(title)s.%(ext)s" "{url}"'
+        os.system(comando)
+        print("✅ Download de vídeo completo!")
 
     elif opcao == 2:
-        stream = yt.streams.filter(only_audio=True).first()
-        arquivo_temp = stream.download(output_path=pasta_destino)
-
+        print("\nBaixando áudio em português (se disponível)...")
+        comando = f'yt-dlp -f "bestaudio[language=pt]/bestaudio" -o "{pasta_destino}/%(title)s.%(ext)s" "{url}"'
+        os.system(comando)
         print("Download de áudio completo!")
+
     else:
         print("Opção inválida.")
 
