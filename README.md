@@ -71,7 +71,7 @@ Teste:
     ffmpeg -version
 ```
 
-Se aparecer a versão, está tudo certo ✅, caso não reinicie seu terminal.
+Se aparecer a versão, está tudo certo ✅, caso não ❌, reinicie seu terminal/IDE.
 
 ## ▶️ Como Usar
 
