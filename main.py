@@ -27,10 +27,19 @@ try:
         print("\033[32mDownload de vídeo completo!\033[m")
 
     elif opcao == 2:
-        print("\nBaixando áudio em português (se disponível)...")
-        comando = f'yt-dlp -f "bestaudio[language=pt]/bestaudio" -o "{pasta_destino}/%(title)s.%(ext)s" "{url}"'
-        os.system(comando)
-        print("\033[32mDownload de áudio completo!\033[m")
+        print("\nBaixando áudio em português (se disponível) e convertendo para MP3...")
+
+        comando = (
+            f'yt-dlp -f "bestaudio[language=pt]/bestaudio" '
+            f'-x --audio-format mp3 --audio-quality 0 '
+            f'-o "{pasta_destino}/%(title)s.%(ext)s" "{url}"'
+        )
+
+        if os.system(comando) != 0:
+            print(f"Erro ao executar comando:\n{comando}")
+            exit()
+
+        print("\033[32mDownload de áudio em MP3 completo!\033[m")
 
     else:
         print("Opção inválida.")
